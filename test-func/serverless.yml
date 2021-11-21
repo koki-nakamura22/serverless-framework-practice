@@ -26,6 +26,8 @@ provider:
   lambdaHashingVersion: 20201221
   profile: serverless-admin
   region: ap-northeast-1
+  deploymentBucket:
+    name: ${file(./serverless-s3.yml):deploymentBucketName}
 
 # you can overwrite defaults here
 #  stage: dev

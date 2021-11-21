@@ -130,3 +130,6 @@ dmypy.json
 
 # serverless framework
 .serverless
+
+# serverless framework config files
+serverless-s3.yml
