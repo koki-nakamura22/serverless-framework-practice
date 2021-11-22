@@ -23,6 +23,7 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: python3.8
+  versionFunctions: true
   lambdaHashingVersion: 20201221
   profile: serverless-admin
   region: ap-northeast-1
@@ -118,3 +119,11 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+plugins:
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true # デプロイ時にserverless-prune-pluginを自動で動作させる
+    number: 3 # AWS Lambda上で管理される世代の最大数
