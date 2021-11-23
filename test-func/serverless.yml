@@ -58,16 +58,25 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
+package:
+  exclude:
+    - serverless-s3.yml
 #  patterns:
 #    - '!exclude-me.py'
 #    - '!exclude-me-dir/**'
 #    - include-me.py
 #    - include-me-dir/**
 
+layers:
+  common:
+    # path: layers/python/common
+    path: layers
+
 functions:
   hello:
     handler: handler.hello
+    layers:
+      - { Ref: CommonLambdaLayer }
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

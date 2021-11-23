@@ -1,10 +1,11 @@
 import json
-
+from common.date import get_today_date
 
 def hello(event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
+        "input": event,
+        "date": str(get_today_date())
     }
 
     response = {
