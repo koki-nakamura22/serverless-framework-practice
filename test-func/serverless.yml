@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: test-func
+service: test-service1
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
