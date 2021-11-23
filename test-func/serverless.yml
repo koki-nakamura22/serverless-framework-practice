@@ -59,8 +59,11 @@ provider:
 
 # you can add packaging information here
 package:
+  individually: true
   exclude:
     - serverless-s3.yml
+    - serverless-s3.yml.org
+    - functions/**
 #  patterns:
 #    - '!exclude-me.py'
 #    - '!exclude-me-dir/**'
@@ -74,9 +77,21 @@ layers:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: functions/hello/handler.hello
     layers:
       - { Ref: CommonLambdaLayer }
+    package:
+      individually: true
+      include:
+        functions/hello/*
+  get_today:
+    handler: functions/get_today/handler.hello
+    layers:
+      - { Ref: CommonLambdaLayer }
+    package:
+      individually: true
+      include:
+        functions/get_today/*
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
