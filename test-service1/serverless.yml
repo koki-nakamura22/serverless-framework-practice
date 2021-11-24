@@ -22,6 +22,7 @@ frameworkVersion: '2'
 
 provider:
   name: aws
+  endpointType: REGIONAL
   runtime: python3.8
   versionFunctions: true
   lambdaHashingVersion: 20201221
@@ -78,6 +79,11 @@ layers:
 functions:
   hello:
     handler: functions/hello/handler.hello
+    events:
+      - http:
+          path: /hello
+          method: get
+          cors: true
     layers:
       - { Ref: CommonLambdaLayer }
     package:
@@ -86,6 +92,11 @@ functions:
         functions/hello/*
   get_today:
     handler: functions/get_today/handler.hello
+    events:
+      - http:
+          path: /get_today
+          method: get
+          cors: true
     layers:
       - { Ref: CommonLambdaLayer }
     package:
