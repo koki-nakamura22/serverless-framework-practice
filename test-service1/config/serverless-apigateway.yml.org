@@ -1,0 +1,2 @@
+apikey-name: apikey-name # API Keyの名前
+apikey-value: apikey-value # API Keyの値

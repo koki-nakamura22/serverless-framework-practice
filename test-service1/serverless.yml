@@ -28,9 +28,12 @@ provider:
   lambdaHashingVersion: 20201221
   profile: serverless-admin
   region: ap-northeast-1
+  apiKeys:
+    - name: ${file(./config/serverless-apigateway.yml):apikey-name}
+      value: ${file(./config/serverless-apigateway.yml):apikey-value}
   deploymentBucket:
-    name: ${file(./serverless-s3.yml):deploymentBucketName}
-    maxPreviousDeploymentArtifacts: ${file(./serverless-s3.yml):maxPreviousDeploymentArtifacts}
+    name: ${file(./config/serverless-s3.yml):deploymentBucketName}
+    maxPreviousDeploymentArtifacts: ${file(./config/serverless-s3.yml):maxPreviousDeploymentArtifacts}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -62,8 +65,7 @@ provider:
 package:
   individually: true
   exclude:
-    - serverless-s3.yml
-    - serverless-s3.yml.org
+    - config/**
     - functions/**
 #  patterns:
 #    - '!exclude-me.py'
@@ -73,7 +75,6 @@ package:
 
 layers:
   common:
-    # path: layers/python/common
     path: layers
 
 functions:
@@ -84,6 +85,7 @@ functions:
           path: /hello
           method: get
           cors: true
+          private: true
     layers:
       - { Ref: CommonLambdaLayer }
     package:
@@ -97,6 +99,7 @@ functions:
           path: /get_today
           method: get
           cors: true
+          private: true
     layers:
       - { Ref: CommonLambdaLayer }
     package:

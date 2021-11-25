@@ -133,3 +133,4 @@ dmypy.json
 
 # serverless framework config files
 serverless-s3.yml
+serverless-apigateway.yml
