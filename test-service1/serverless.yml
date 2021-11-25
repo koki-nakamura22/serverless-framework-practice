@@ -28,9 +28,18 @@ provider:
   lambdaHashingVersion: 20201221
   profile: serverless-admin
   region: ap-northeast-1
-  apiKeys:
-    - name: ${file(./config/serverless-apigateway.yml):apikey-name}
-      value: ${file(./config/serverless-apigateway.yml):apikey-value}
+  apiGateway:
+    apiKeys:
+      - name: ${file(./config/serverless-apigateway.yml):apikey-name}
+        value: ${file(./config/serverless-apigateway.yml):apikey-value}
+    usagePlan:
+      quota:
+        limit: 100
+        offset: 0
+        period: DAY
+      throttle:
+        burstLimit: 200
+        rateLimit: 100
   deploymentBucket:
     name: ${file(./config/serverless-s3.yml):deploymentBucketName}
     maxPreviousDeploymentArtifacts: ${file(./config/serverless-s3.yml):maxPreviousDeploymentArtifacts}
