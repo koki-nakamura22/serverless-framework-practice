@@ -1,2 +1,9 @@
-apikey-name: apikey-name # API Keyの名前
-apikey-value: apikey-value # API Keyの値
+dev:
+  apikey-name: dev-apikey-name # API Keyの名前
+  apikey-value: dev-apikey-value # API Keyの値
+st:
+  apikey-name: st-apikey-name # API Keyの名前
+  apikey-value: st-apikey-value # API Keyの値
+pro:
+  apikey-name: pro-apikey-name # API Keyの名前
+  apikey-value: pro-apikey-value # API Keyの値
