@@ -84,6 +84,18 @@ functions:
       individually: true
       include:
         functions/get_func_with_required_query_params/*
+  post_func:
+    handler: functions/post_func/handler.post_func
+    events:
+      - http:
+          path: /post_func
+          method: post
+          cors: true
+          private: true
+    package:
+      individually: true
+      include:
+        functions/post_func/*
 
 plugins:
   - serverless-prune-plugin
