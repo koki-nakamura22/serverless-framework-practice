@@ -99,6 +99,7 @@ functions:
 
 plugins:
   - serverless-prune-plugin
+  - serverless-offline
 
 custom:
   prune:
