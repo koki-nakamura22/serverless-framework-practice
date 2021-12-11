@@ -3,7 +3,6 @@ service: dynamodb-serverless
 frameworkVersion: '2'
 
 provider:
-  awsAccountId: ${file(./config/aws-account.yml):id}
   name: aws
   stage: ${opt:stage, "dev"}
   endpointType: REGIONAL
@@ -14,16 +13,18 @@ provider:
   region: ap-northeast-1
   apiGateway:
     apiKeys:
-      - name: ${file(./config/serverless-apigateway.yml):${self:provider.stage}.apikey-name}
-        # value: ${file(./config/serverless-apigateway.yml):${self:provider.stage}.apikey-value}
+      - free:
+          - name: ${file(./config/serverless-apigateway.yml):${self:provider.stage}.apikey-name}
+            value: ${file(./config/serverless-apigateway.yml):${self:provider.stage}.apikey-value}
     usagePlan:
-      quota:
-        limit: 100
-        offset: 0
-        period: DAY
-      throttle:
-        burstLimit: 200
-        rateLimit: 100
+      - free:
+          quota:
+            limit: 100 # APIの呼び出しを行える最大回数
+            offset: 0 # APIの呼び出し回数の初期値 (通常は0回を指定)
+            period: DAY # DAY or WEEK or MONTH
+          throttle:
+            burstLimit: 200 # 1秒あたりに処理できるAPIリクエスト数
+            rateLimit: 100 # 同時に処理できる最大リクエスト数
   deploymentBucket:
     name: ${file(./config/serverless-s3.yml):deploymentBucketName}
     maxPreviousDeploymentArtifacts: ${file(./config/serverless-s3.yml):maxPreviousDeploymentArtifacts}
@@ -109,7 +110,7 @@ resources:
                     - "logs:PutLogEvents"
                     - "dynamodb:*"
                   Resource:
-                    - "arn:aws:dynamodb:${self:provider.region}:${self:provider.awsAccountId}:table/*"
+                    - "arn:aws:dynamodb:${self:provider.region}:${file(./config/aws-account.yml):id}:table/*"
 
 custom:
   prune:
