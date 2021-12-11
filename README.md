@@ -12,8 +12,8 @@
 
 ### Install
 ```sh
-npm install --save-dev serverless-prune-plugin
-npm install --save-dev serverless-offline
+sls plugin install -n serverless-prune-plugin
+sls plugin install -n serverless-offline
 ```
 
 ### Usage
