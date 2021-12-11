@@ -1,0 +1,2 @@
+deploymentBucketName: test-service1-deployment-bucket
+maxPreviousDeploymentArtifacts: 3 # デプロイ用S3バケットには最大で3世代のみ保存

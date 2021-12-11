@@ -132,5 +132,6 @@ dmypy.json
 .serverless
 
 # serverless framework config files
+aws-account.yml
 serverless-s3.yml
 serverless-apigateway.yml
