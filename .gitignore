@@ -130,8 +130,11 @@ dmypy.json
 
 # serverless framework
 .serverless
+.dynamodb
 
 # serverless framework config files
 aws-account.yml
 serverless-s3.yml
 serverless-apigateway.yml
+
+node_modules
