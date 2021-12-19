@@ -1,0 +1,48 @@
+service: python-requirements-div-req-txt
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: ${opt:stage, "dev"}
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  profile: serverless-admin
+  region: ap-northeast-1
+  environment:
+    STAGE: ${self:provider.stage}
+
+package:
+  individually: true
+  exclude:
+    - config/**
+    - functions/**
+    - README.md
+
+functions:
+  func1:
+    handler: handler.func1
+    module: functions/func1
+    memorySize: 128
+    timeout: 3
+    package:
+      individually: true
+      include:
+        functions/func1/*
+  func2:
+    handler: handler.func2
+    module: functions/func2
+    memorySize: 128
+    timeout: 10
+    package:
+      individually: true
+      include:
+        functions/func2/*
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    useDownloadCache: true
+    useStaticCache: true
