@@ -1,4 +1,4 @@
-# dynamodb-serverless
+# test-service1
 
 ## Plugins
 
@@ -9,6 +9,13 @@ sls plugin install -n serverless-offline
 ```
 
 ### Usage
+Add installed plugin names to the plugins section in your serverless.yml.
+e.g.
+```yaml
+plugins:
+  - serverless-prune-plugin
+  - serverless-offline
+```
 
 #### serverless-prune-plugin
 Add settings to your serverless.yml that is like the bellow.
