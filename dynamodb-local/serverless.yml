@@ -1,14 +1,16 @@
 service: dynamodb-local
 
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
   stage: ${opt:stage, "dev"}
+  endpointType: REGIONAL
   runtime: python3.8
+  versionFunctions: true
   lambdaHashingVersion: 20201221
-  environment:
-    STAGE: ${self:provider.stage}
+  profile: serverless-admin
+  region: ap-northeast-1
 
 package:
   individually: true
@@ -24,8 +26,7 @@ functions:
     timeout: 60
     package:
       individually: true
-      include:
-        functions/scan/*
+      include: functions/scan/*
 
 plugins:
   - serverless-dynamodb-local
@@ -34,22 +35,22 @@ plugins:
 resources:
   Resources:
     DynamoDbTable:
-        Type: 'AWS::DynamoDB::Table'
-        Properties:
-            AttributeDefinitions:
-                - AttributeName: id
-                  AttributeType: S
-                - AttributeName: name
-                  AttributeType: S
-            KeySchema:
-                - AttributeName: id
-                  KeyType: HASH
-                - AttributeName: name
-                  KeyType: RANGE
-            ProvisionedThroughput:
-                ReadCapacityUnits: 1
-                WriteCapacityUnits: 1
-            TableName: TestUsersTable-${self:provider.stage}
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: TestUsersTable-${self:provider.stage}
 
 custom:
   dynamodb:
@@ -65,4 +66,4 @@ custom:
         sources:
           - table: TestUsersTable-dev
             sources:
-            - ./seeds/TestUsersTable-dev.json
+              - ./seeds/TestUsersTable-dev.json
